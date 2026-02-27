@@ -241,8 +241,6 @@ $$
   <img src="https://github.com/user-attachments/assets/4a4405c0-86dd-42cf-8dac-3ba86d2063c0" width="600" alt="Robot 6GDL"/>
 </p>
 
-# Robot de Interacción 6GDL
-
 ## 00 → 01
 
 ### Descripción
