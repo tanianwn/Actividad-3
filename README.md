@@ -1,1 +1,233 @@
 # Actividad-3
+
+# Robot Cartesiano 4GDL
+
+## A1 → A2
+
+### Descripción
+- Rotación negativa de -90° alrededor del eje X1
+- Traslación positiva en el eje Z1
+
+### Matriz de rotación en X (forma general)
+
+$$
+R_x(\theta)=
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos\theta & -\sin\theta \\
+0 & \sin\theta & \cos\theta
+\end{bmatrix}
+$$
+
+### Matriz de rotación en Z (forma general)
+
+$$
+R_z(\theta)=
+\begin{bmatrix}
+\cos\theta & -\sin\theta & 0 \\
+\sin\theta & \cos\theta & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+### Evaluación en $-90^\circ$
+
+$$
+R_x(-90^\circ)=
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & -1 & 0
+\end{bmatrix}
+$$
+
+### Multiplicación
+
+$$
+R = R_x(-90^\circ) R_z(\theta_1)
+$$
+
+$$
+R =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & -1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+\cos\theta_1 & -\sin\theta_1 & 0 \\
+\sin\theta_1 & \cos\theta_1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+### Resultado
+
+$$
+R_{12} =
+\begin{bmatrix}
+\cos\theta_1 & -\sin\theta_1 & 0 \\
+0 & 0 & 1 \\
+-\sin\theta_1 & -\cos\theta_1 & 0
+\end{bmatrix}
+$$
+
+### Vector de traslación
+
+$$
+P =
+\begin{bmatrix}
+0 \\
+0 \\
+L_1
+\end{bmatrix}
+$$
+
+### Matriz de transformación homogénea
+
+$$
+T_{12} =
+\begin{bmatrix}
+\cos\theta_1 & -\sin\theta_1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+-\sin\theta_1 & -\cos\theta_1 & 0 & L_1 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+---
+
+## A2 → A3
+
+### Descripción
+- No existe rotación
+- Traslación positiva en el eje Z2
+
+### Resultado
+
+$$
+R_{23} = I =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+### Vector de traslación
+
+$$
+P =
+\begin{bmatrix}
+0 \\
+0 \\
+L_2
+\end{bmatrix}
+$$
+
+### Matriz de transformación homogénea
+
+$$
+T_{23} =
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & L_2 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+---
+
+## A3 → A4
+
+### Descripción
+- Rotación negativa de -90° alrededor del eje Y2
+- Traslación negativa en el eje Z3
+
+### Matriz de rotación en Y (forma general)
+
+$$
+R_y(\theta)=
+\begin{bmatrix}
+\cos\theta & 0 & \sin\theta \\
+0 & 1 & 0 \\
+-\sin\theta & 0 & \cos\theta
+\end{bmatrix}
+$$
+
+### Matriz de rotación en Z (forma general)
+
+$$
+R_z(\theta)=
+\begin{bmatrix}
+\cos\theta & -\sin\theta & 0 \\
+\sin\theta & \cos\theta & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+### Evaluación en $-90^\circ$
+
+$$
+R_y(-90^\circ)=
+\begin{bmatrix}
+0 & 0 & -1 \\
+0 & 1 & 0 \\
+1 & 0 & 0
+\end{bmatrix}
+$$
+
+### Multiplicación
+
+$$
+R = R_y(-90^\circ) R_z(\theta_3)
+$$
+
+$$
+R =
+\begin{bmatrix}
+0 & 0 & -1 \\
+0 & 1 & 0 \\
+1 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+\cos\theta_3 & -\sin\theta_3 & 0 \\
+\sin\theta_3 & \cos\theta_3 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+### Resultado
+
+$$
+R_{34} =
+\begin{bmatrix}
+0 & 0 & -1 \\
+\sin\theta_3 & \cos\theta_3 & 0 \\
+\cos\theta_3 & -\sin\theta_3 & 0
+\end{bmatrix}
+$$
+
+### Vector de traslación
+
+$$
+P =
+\begin{bmatrix}
+0 \\
+0 \\
+-L_3
+\end{bmatrix}
+$$
+
+### Matriz de transformación homogénea
+
+$$
+T_{34} =
+\begin{bmatrix}
+0 & 0 & -1 & 0 \\
+\sin\theta_3 & \cos\theta_3 & 0 & 0 \\
+\cos\theta_3 & -\sin\theta_3 & 0 & -L_3 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
