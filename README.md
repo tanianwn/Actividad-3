@@ -340,7 +340,7 @@ $$
 ## 01 → 02
 
 ### Descripción
-- No existe rotación de transformación fija
+- No existe rotación de transformación 
 - Rotación alrededor del eje Z1 con ángulo $\theta_2$
 - Traslación negativa de $a_2\sin\theta_2$ sobre el eje X1
 - Traslación positiva de $a_2\cos\theta_2$ sobre el eje Y1
