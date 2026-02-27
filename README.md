@@ -234,3 +234,13 @@ T_{34} =
 0 & 0 & 0 & 1
 \end{bmatrix}
 $$
+
+# Robot sistema de interacción 6GDL
+## Sistema de referencia
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4a4405c0-86dd-42cf-8dac-3ba86d2063c0" width="600" alt="Robot 6GDL"/>
+</p>
+
+
+
+
