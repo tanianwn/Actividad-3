@@ -2,7 +2,7 @@
 
 # Robot Cartesiano 4GDL
 
-## A1 → A2
+## L1 → L2
 
 ### Descripción
 - Rotación negativa de -90° alrededor del eje X1
@@ -97,7 +97,7 @@ $$
 
 ---
 
-## A2 → A3
+## L2 → L3
 
 ### Descripción
 - No existe rotación
@@ -139,7 +139,7 @@ $$
 
 ---
 
-## A3 → A4
+## L3 → L4
 
 ### Descripción
 - Rotación negativa de -90° alrededor del eje Y2
