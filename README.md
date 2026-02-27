@@ -100,7 +100,7 @@ $$
 
 ---
 
-## A2 → A3
+## L2 → L3
 
 ### Descripción
 - Rotación negativa de -90° alrededor del eje Y2
