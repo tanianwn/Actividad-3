@@ -1,7 +1,10 @@
 # Actividad-3
 
 # Robot Cartesiano 4GDL
-
+## Robot 6GDL - Sistemas de referencia
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/72890c84-a238-49ee-9bc2-f0c90c7b8267" width="600" alt="Robot 6GDL"/>
+</p>
 ## L1 → L2
 
 ### Descripción
