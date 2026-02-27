@@ -43,19 +43,19 @@ R(:,:,1)= [cos(th1)  -sin(th1)   0;
 
 %Junta 2
 %Posición de la junta 2 respecto a 1
-P(:,:,2)= [0; 0; l2];
+P(:,:,2)= [l2; 0; 0];
 %Matriz de rotación de la junta 2 respecto a 1
-R(:,:,2)= [1  0  0;
-           0  1  0;
-           0  0  1];
+R(:,:,2)= [0          0          -1;
+           sin(th2)   cos(th2)    0;
+           cos(th2)  -sin(th2)    0];
 
 %Junta 3
 %Posición de la junta 3 respecto a 2
 P(:,:,3)= [0; 0; -l3];
 %Matriz de rotación de la junta 3 respecto a 2
-R(:,:,3)= [0          0          -1;
-           sin(th3)   cos(th3)    0;
-           cos(th3)  -sin(th3)    0];
+R(:,:,3)= [1  0  0;
+           0  1  0;
+           0  0  1];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %SECCIÓN 7
