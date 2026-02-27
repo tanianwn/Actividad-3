@@ -240,6 +240,7 @@ $$
 <p align="center">
   <img src="https://github.com/user-attachments/assets/4a4405c0-86dd-42cf-8dac-3ba86d2063c0" width="600" alt="Robot 6GDL"/>
 </p>
+# Robot de Interacción 6GDL
 
 ## 00 → 01
 
@@ -340,7 +341,7 @@ $$
 ## 01 → 02
 
 ### Descripción
-- No existe rotación de transformación 
+- No existe rotación de transformación fija
 - Rotación alrededor del eje Z1 con ángulo $\theta_2$
 - Traslación negativa de $a_2\sin\theta_2$ sobre el eje X1
 - Traslación positiva de $a_2\cos\theta_2$ sobre el eje Y1
@@ -470,17 +471,6 @@ $$
 
 $$
 R_{23} =
-\begin{bmatrix}
-0 & -1 & 0 \\
--1 & 0 & 0 \\
-0 & 0 & -1
-\end{bmatrix}
-\begin{bmatrix}
-\cos\theta_3 & -\sin\theta_3 & 0 \\
-\sin\theta_3 & \cos\theta_3 & 0 \\
-0 & 0 & 1
-\end{bmatrix}
-=
 \begin{bmatrix}
 -\sin\theta_3 & -\cos\theta_3 & 0 \\
 -\cos\theta_3 & \sin\theta_3 & 0 \\
@@ -614,8 +604,8 @@ $$
 ### Descripción
 - Rotación alrededor del eje Z4 con ángulo $\theta_5$
 - Rotación positiva de 90° alrededor del eje X4
-- Traslación negativa de $a_4\cos\theta_5$ sobre el eje Y4
-- Traslación negativa de $a_4\sin\theta_5$ sobre el eje X4
+- Traslación negativa de $a_4\cos\theta_5$ sobre el eje X4
+- Traslación negativa de $a_4\sin\theta_5$ sobre el eje Y4
 
 ### Matriz de rotación en X (forma general)
 
@@ -686,8 +676,8 @@ $$
 $$
 P =
 \begin{bmatrix}
--a_4\sin\theta_5 \\
 -a_4\cos\theta_5 \\
+-a_4\sin\theta_5 \\
 0
 \end{bmatrix}
 $$
@@ -697,8 +687,8 @@ $$
 $$
 T_{45} =
 \begin{bmatrix}
-\cos\theta_5 & -\sin\theta_5 & 0 & -a_4\sin\theta_5 \\
-0 & 0 & -1 & -a_4\cos\theta_5 \\
+\cos\theta_5 & -\sin\theta_5 & 0 & -a_4\cos\theta_5 \\
+0 & 0 & -1 & -a_4\sin\theta_5 \\
 \sin\theta_5 & \cos\theta_5 & 0 & 0 \\
 0 & 0 & 0 & 1
 \end{bmatrix}
