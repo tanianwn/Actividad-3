@@ -3,7 +3,7 @@
 # Robot Cartesiano 4GDL
 ## Sistema de referencia
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/72890c84-a238-49ee-9bc2-f0c90c7b8267" width="600" alt="Robot 6GDL"/>
+  <img src="https://github.com/user-attachments/assets/d1dc1293-3cec-44a9-b42c-86b106e3942e" width="600" alt="Robot 6GDL"/>
 </p>
 
 ## L1 → L2
