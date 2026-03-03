@@ -1,155 +1,86 @@
-%Limpieza de pantalla
-clear all
+%% Limpieza
+clear
 close all
 clc
-%SECCIÓN 1
-%Declaración de variables simbólicas
-syms th1(t) th2(t) th3(t) t l1 l2 l3
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%SECCIÓN 2
-%Configuración del robot, 0 para junta rotacional, 1 para junta prismática
-RP=[1 1 1];
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Variables simbólicas (PRISMÁTICAS)
+syms d1(t) d2(t) d3(t) d4(t) t
 
-%SECCIÓN 3
-%Creamos el vector de coordenadas articulares
-Q= [th1, th2, th3];
-disp('Coordenadas generalizadas');
-pretty (Q);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+RP = [1 1 1 1];   % Todas prismáticas
+Q  = [d1 d2 d3 d4];
+Qp = diff(Q,t);
 
-%SECCIÓN 4
-%Creamos el vector de velocidades generalizadas
-Qp= diff(Q, t);
-disp('Velocidades generalizadas');
-pretty (Qp);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GDL = length(RP);
 
-%SECCIÓN 5
-%Número de grado de libertad del robot
-GDL= size(RP,2);
-GDL_str= num2str(GDL);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% --- Articulación 1 ---
+% Traslación en Z
+P(:,:,1) = [0;0;d1];
 
-%SECCIÓN 6
-%Junta 1
-%Posición de la junta 1 respecto a 0
-P(:,:,1)= [0; 0; l1];
-%Matriz de rotación de la junta 1 respecto a 0
-R(:,:,1)= [cos(th1)  -sin(th1)   0;
-           0          0          1;
-          -sin(th1)  -cos(th1)   0];
+% Rotación fija (-90° en X si necesitas alinear marcos)
+R(:,:,1) = [1 0 0;
+            0 0 1;
+            0 -1 0];
 
-%Junta 2
-%Posición de la junta 2 respecto a 1
-P(:,:,2)= [l2; 0; 0];
-%Matriz de rotación de la junta 2 respecto a 1
-R(:,:,2)= [0          0          -1;
-           sin(th2)   cos(th2)    0;
-           cos(th2)  -sin(th2)    0];
+%% --- Articulación 2 ---
+% Traslación en X
+P(:,:,2) = [d2;0;0];
 
-%Junta 3
-%Posición de la junta 3 respecto a 2
-P(:,:,3)= [0; 0; -l3];
-%Matriz de rotación de la junta 3 respecto a 2
-R(:,:,3)= [1  0  0;
-           0  1  0;
-           0  0  1];
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sin rotación variable
+R(:,:,2) = eye(3);
 
-%SECCIÓN 7
-%Creamos un vector de ceros
-Vector_Zeros= zeros(1, 3);
+%% --- Articulación 3 ---
+% Traslación en Y
+P(:,:,3) = [0;d3;0];
 
-%Inicializamos las matrices de transformación Homogénea locales
-A(:,:,GDL)=simplify([R(:,:,GDL) P(:,:,GDL); Vector_Zeros 1]);
-%Inicializamos las matrices de transformación Homogénea globales
-T(:,:,GDL)=simplify([R(:,:,GDL) P(:,:,GDL); Vector_Zeros 1]);
-%Inicializamos las posiciones vistas desde el marco de referencia inercial
-PO(:,:,GDL)= P(:,:,GDL); 
-%Inicializamos las matrices de rotación vistas desde el marco de referencia inercial
-RO(:,:,GDL)= R(:,:,GDL); 
-%Inicializamos las INVERSAS de las matrices de rotación vistas desde el marco de referencia inercial
-RO_inv(:,:,GDL)= R(:,:,GDL); 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+R(:,:,3) = eye(3);
 
-%SECCIÓN 8
+%% --- Articulación 4 ---
+% Traslación en Z
+P(:,:,4) = [0;0;d4];
+
+R(:,:,4) = eye(3);
+
+%% Construcción de matrices homogéneas
+Vector_Zeros = zeros(1,3);
+
 for i = 1:GDL
-    i_str= num2str(i);
-    %Locales
-    disp(strcat('Matriz de Transformación local A', i_str));
-    A(:,:,i)=simplify([R(:,:,i) P(:,:,i); Vector_Zeros 1]);
-    pretty (A(:,:,i)); 
-
-   %Globales
-    try
-       T(:,:,i)= T(:,:,i-1)*A(:,:,i);
-    catch
-       T(:,:,i)= A(:,:,i);
+    
+    A(:,:,i) = [R(:,:,i) P(:,:,i);
+                Vector_Zeros 1];
+    
+    if i == 1
+        T(:,:,i) = A(:,:,i);
+    else
+        T(:,:,i) = simplify(T(:,:,i-1)*A(:,:,i));
     end
-    disp(strcat('Matriz de Transformación global T', i_str));
-    T(:,:,i)= simplify(T(:,:,i));
+    
+    PO(:,:,i) = T(1:3,4,i);
+    RO(:,:,i) = T(1:3,1:3,i);
+    
+    disp(['T',num2str(i),' ='])
     pretty(T(:,:,i))
-
-    RO(:,:,i)= T(1:3,1:3,i);
-    RO_inv(:,:,i)= transpose(RO(:,:,i));
-    PO(:,:,i)= T(1:3,4,i);
 end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%SECCIÓN 9
-%Calculamos el jacobiano lineal de forma diferencial
-disp('Jacobiano lineal obtenido de forma diferencial');
-Jv11= functionalDerivative(PO(1,1,GDL), th1);
-Jv12= functionalDerivative(PO(1,1,GDL), th2);
-Jv21= functionalDerivative(PO(2,1,GDL), th1);
-Jv22= functionalDerivative(PO(2,1,GDL), th2);
-Jv31= functionalDerivative(PO(3,1,GDL), th1);
-Jv32= functionalDerivative(PO(3,1,GDL), th2);
+%% JACOBIANO ANALÍTICO (PRISMÁTICO)
 
-jv_d=simplify([Jv11 Jv12;
-              Jv21 Jv22;
-              Jv31 Jv32]);
-pretty(jv_d);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+for k = 1:GDL
+    
+    try
+        Jv(:,k) = RO(:,3,k-1);
+    catch
+        Jv(:,k) = [0;0;1];
+    end
+    
+    Jw(:,k) = [0;0;0];   % Prismáticas no generan velocidad angular
+end
 
-%SECCIÓN 10
-%Calculamos el jacobiano lineal de forma analítica
-Jv_a(:,GDL)=PO(:,:,GDL);
-Jw_a(:,GDL)=PO(:,:,GDL);
+Jv = simplify(Jv);
+Jw = simplify(Jw);
 
-for k= 1:GDL
-    if RP(k)==0
-        try
-            Jv_a(:,k)= cross(RO(:,3,k-1), PO(:,:,GDL)-PO(:,:,k-1));
-            Jw_a(:,k)= RO(:,3,k-1);
-        catch
-            Jv_a(:,k)= cross([0,0,1], PO(:,:,GDL));
-            Jw_a(:,k)=[0,0,1];
-        end
-     elseif RP(k)==1
-        try
-            Jv_a(:,k)= RO(:,3,k-1);
-        catch
-            Jv_a(:,k)=[0,0,1];
-        end
-            Jw_a(:,k)=[0,0,0];
-     end
- end    
+disp('Velocidad lineal:')
+V = simplify(Jv*Qp.')
+pretty(V)
 
-Jv_a= simplify(Jv_a);
-Jw_a= simplify(Jw_a);
-disp('Jacobiano lineal obtenido de forma analítica');
-pretty(Jv_a);
-disp('Jacobiano ángular obtenido de forma analítica');
-pretty(Jw_a);
-
-disp('Velocidad lineal obtenida mediante el Jacobiano lineal');
-V=simplify(Jv_a*Qp');
-pretty(V);
-disp('Velocidad angular obtenida mediante el Jacobiano angular');
-W=simplify(Jw_a*Qp');
-pretty(W);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+disp('Velocidad angular:')
+W = simplify(Jw*Qp.')
+pretty(W)
