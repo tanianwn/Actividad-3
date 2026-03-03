@@ -12,8 +12,6 @@
 - Rotación fija de -90° alrededor del eje X1  
 - Traslación positiva en el eje Z1 (junta prismática)
 
----
-
 ### Matriz de rotación
 
 $$
@@ -25,7 +23,6 @@ R_{12} =
 \end{bmatrix}
 $$
 
----
 
 ### Vector de traslación
 
@@ -37,8 +34,6 @@ P_{12} =
 L_1
 \end{bmatrix}
 $$
-
----
 
 ### Matriz de transformación homogénea
 
@@ -52,15 +47,12 @@ T_{12} =
 \end{bmatrix}
 $$
 
----
-
 ## L2 → L3
 
 ### Descripción
 - Sin rotación
 - Traslación positiva en el eje X2 (junta prismática)
 
----
 
 ### Matriz de rotación
 
@@ -73,7 +65,6 @@ R_{23} =
 \end{bmatrix}
 $$
 
----
 
 ### Vector de traslación
 
@@ -86,7 +77,6 @@ L_2 \\
 \end{bmatrix}
 $$
 
----
 
 ### Matriz de transformación homogénea
 
@@ -100,15 +90,12 @@ T_{23} =
 \end{bmatrix}
 $$
 
----
 
 ## L3 → L4
 
 ### Descripción
 - Sin rotación
 - Traslación positiva en el eje Y3 (junta prismática)
-
----
 
 ### Matriz de rotación
 
@@ -121,8 +108,6 @@ R_{34} =
 \end{bmatrix}
 $$
 
----
-
 ### Vector de traslación
 
 $$
@@ -133,8 +118,6 @@ L_3 \\
 0
 \end{bmatrix}
 $$
-
----
 
 ### Matriz de transformación homogénea
 
@@ -156,8 +139,6 @@ $$
 - Sin rotación
 - Traslación positiva en el eje Z4 (junta prismática)
 
----
-
 ### Matriz de rotación
 
 $$
@@ -169,7 +150,6 @@ R_{45} =
 \end{bmatrix}
 $$
 
----
 
 ### Vector de traslación
 
@@ -181,8 +161,6 @@ P_{45} =
 L_4
 \end{bmatrix}
 $$
-
----
 
 ### Matriz de transformación homogénea
 
