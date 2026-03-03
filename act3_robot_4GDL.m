@@ -9,7 +9,7 @@ syms th1(t) th2(t) th3(t) t l1 l2 l3
 
 %SECCIÓN 2
 %Configuración del robot, 0 para junta rotacional, 1 para junta prismática
-RP=[0 0 0];
+RP=[1 1 1];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %SECCIÓN 3
@@ -152,3 +152,4 @@ disp('Velocidad angular obtenida mediante el Jacobiano angular');
 W=simplify(Jw_a*Qp');
 pretty(W);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
