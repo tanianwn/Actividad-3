@@ -4,12 +4,12 @@ close all
 clc
 %SECCIÓN 1
 %Declaración de variables simbólicas
-syms th1(t) th2(t) th3(t) th4(t) th5(t) t d1 a2 a3 d4 a4
+syms th1(t) th2(t) th3(t) th4(t) th5(t) th6(t) t d1 a2 a3 d4 a4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %SECCIÓN 2
 %Configuración del robot, 0 para junta rotacional, 1 para junta prismática
-RP=[0 0 0 0 0];
+RP=[0 0 0 0 0 0];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %SECCIÓN 3
@@ -72,6 +72,12 @@ P(:,:,5)= [-a4*cos(th5); -a4*sin(th5); 0];
 R(:,:,5)= [cos(th5)  -sin(th5)   0;
            0          0         -1;
            sin(th5)   cos(th5)   0];
+%junta 6 
+P(:,:,6)= [0; 0; 0];
+
+R(:,:,6)= [cos(th6) -sin(th6)  0;
+           sin(th6)  cos(th6)  0;
+           0         0         1];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %SECCIÓN 7
@@ -167,4 +173,5 @@ pretty(V);
 disp('Velocidad angular obtenida mediante el Jacobiano angular');
 W=simplify(Jw_a*Qp');
 pretty(W);
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
