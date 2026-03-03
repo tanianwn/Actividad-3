@@ -9,20 +9,19 @@
 ## L1 → L2
 
 ### Descripción
-- Rotación fija de -90° alrededor del eje X1  
-- Traslación positiva en el eje Z1 (junta prismática)
+- Rotación negativa de -90° alrededor del eje X1
+- Traslación positiva en el eje Z1
 
-### Matriz de rotación
+### Evaluación de la rotación fija
 
 $$
 R_{12} =
 \begin{bmatrix}
+1 & 0 & 0 \\
 0 & 0 & 1 \\
-0 & 1 & 0 \\
--1 & 0 & 0
+0 & -1 & 0
 \end{bmatrix}
 $$
-
 
 ### Vector de traslación
 
@@ -40,9 +39,9 @@ $$
 $$
 T_{12} =
 \begin{bmatrix}
+1 & 0 & 0 & 0 \\
 0 & 0 & 1 & 0 \\
-0 & 1 & 0 & 0 \\
--1 & 0 & 0 & L_1 \\
+0 & -1 & 0 & L_1 \\
 0 & 0 & 0 & 1
 \end{bmatrix}
 $$
@@ -50,21 +49,19 @@ $$
 ## L2 → L3
 
 ### Descripción
-- Sin rotación
-- Traslación positiva en el eje X2 (junta prismática)
+- Rotación negativa de -90° alrededor del eje Y2
+- Traslación positiva en el eje X2
 
-
-### Matriz de rotación
+### Evaluación de la rotación fija
 
 $$
 R_{23} =
 \begin{bmatrix}
-1 & 0 & 0 \\
+0 & 0 & -1 \\
 0 & 1 & 0 \\
-0 & 0 & 1
+1 & 0 & 0
 \end{bmatrix}
 $$
-
 
 ### Vector de traslación
 
@@ -77,25 +74,23 @@ L_2 \\
 \end{bmatrix}
 $$
 
-
 ### Matriz de transformación homogénea
 
 $$
 T_{23} =
 \begin{bmatrix}
-1 & 0 & 0 & L_2 \\
+0 & 0 & -1 & L_2 \\
 0 & 1 & 0 & 0 \\
-0 & 0 & 1 & 0 \\
+1 & 0 & 0 & 0 \\
 0 & 0 & 0 & 1
 \end{bmatrix}
 $$
 
-
 ## L3 → L4
 
 ### Descripción
-- Sin rotación
-- Traslación positiva en el eje Y3 (junta prismática)
+- No existe rotación
+- Traslación negativa en el eje Z3
 
 ### Matriz de rotación
 
@@ -114,8 +109,8 @@ $$
 P_{34} =
 \begin{bmatrix}
 0 \\
-L_3 \\
-0
+0 \\
+- L_3
 \end{bmatrix}
 $$
 
@@ -125,51 +120,8 @@ $$
 T_{34} =
 \begin{bmatrix}
 1 & 0 & 0 & 0 \\
-0 & 1 & 0 & L_3 \\
-0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 1
-\end{bmatrix}
-$$
-
----
-
-## L4 → Efector Final
-
-### Descripción
-- Sin rotación
-- Traslación positiva en el eje Z4 (junta prismática)
-
-### Matriz de rotación
-
-$$
-R_{45} =
-\begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1
-\end{bmatrix}
-$$
-
-
-### Vector de traslación
-
-$$
-P_{45} =
-\begin{bmatrix}
-0 \\
-0 \\
-L_4
-\end{bmatrix}
-$$
-
-### Matriz de transformación homogénea
-
-$$
-T_{45} =
-\begin{bmatrix}
-1 & 0 & 0 & 0 \\
 0 & 1 & 0 & 0 \\
-0 & 0 & 1 & L_4 \\
+0 & 0 & 1 & -L_3 \\
 0 & 0 & 0 & 1
 \end{bmatrix}
 $$
